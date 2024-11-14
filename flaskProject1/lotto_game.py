@@ -1,29 +1,44 @@
 from flask import Flask, render_template, request, redirect, url_for
 import random
 
+# Create an instance of the Flask application
 app = Flask(__name__)
 
 # Generate and shuffle a list of numbers for lotto
 random_numbers = [i for i in range(1, 50)]
-random.shuffle(random_numbers)
 
-# Select the first 6 numbers as the lotto numbers
-lotto_numbers = [random_numbers[0], random_numbers[1], random_numbers[2],
-                 random_numbers[3], random_numbers[4], random_numbers[5]]
-lotto_numbers.sort()
+
+def new_lotto_numbers():
+    """
+    Function to generate new lotto numbers.
+    Shuffles the list of numbers and selects the first six numbers, which are then sorted.
+
+    Returns:
+        list: A list of six numbers to be used as lotto results.
+    """
+    random.shuffle(random_numbers)
+    new_lotto_list = [random_numbers[0], random_numbers[1], random_numbers[2],
+                      random_numbers[3], random_numbers[4], random_numbers[5]]
+    new_lotto_list.sort()
+    return new_lotto_list
+
 
 # Initialize global variables
+lotto_numbers = new_lotto_numbers()
 nums_list = []  # List of user-selected numbers
-rounds = 1      # Count of rounds the user has played
-founded_equals = 0  # Count of matched numbers between user and lotto numbers
-message = ""    # Result message to be displayed
+rounds = 1  # Count of rounds the user has played
+founded_equals = 0  # Count of matched numbers between lotto and user numbers
+message = ""  # Result message to be displayed
 
 
 @app.route('/', methods=['GET', 'POST'])
 def nums_request():
     """
-    Handles GET and POST requests for the main page.
+    Handles GET and POST requests on the main page.
     Allows the user to submit numbers and check if they match the lotto numbers.
+
+    Returns:
+        str: HTML template with the current round and list of user-submitted numbers.
     """
     global nums_list, rounds, founded_equals, message
 
@@ -33,17 +48,20 @@ def nums_request():
         if one_number_str.isdigit():
             one_number = int(one_number_str)
 
+            # Check if the number is within the allowed range and has not been submitted before
             if one_number not in nums_list and 1 <= one_number <= 49:
                 if len(nums_list) < 6:
                     nums_list.append(one_number)
                     rounds += 1
 
+            # Once six numbers are submitted, compare them with the lotto numbers
             if len(nums_list) >= 6:
                 nums_list.sort()
                 for i in range(len(lotto_numbers)):
                     if lotto_numbers[i] == nums_list[i]:
                         founded_equals += 1
 
+                # Set the message based on the number of matches
                 if founded_equals == 6:
                     message = "Congratulations! You won the grand prize of $100,000!"
                 elif founded_equals == 5:
@@ -66,6 +84,9 @@ def nums_request():
 def result():
     """
     Displays the result of the game, showing both the lotto numbers and the user's selected numbers.
+
+    Returns:
+        str: HTML template with the game results.
     """
     global nums_list, lotto_numbers, message
 
@@ -90,16 +111,15 @@ def result():
 @app.route('/reset_game', methods=['GET'])
 def reset_game():
     """
-    Resets the game by clearing user-selected numbers, shuffling lotto numbers,
+    Resets the game by clearing the list of user-submitted numbers, shuffling the lotto numbers,
     and resetting global variables.
+
+    Returns:
+        werkzeug.wrappers.Response: Redirect to the main game page.
     """
     global nums_list, rounds, founded_equals, message, lotto_numbers
 
-    random.shuffle(random_numbers)
-    lotto_numbers = [random_numbers[0], random_numbers[1], random_numbers[2],
-                     random_numbers[3], random_numbers[4], random_numbers[5]]
-    lotto_numbers.sort()
-
+    lotto_numbers = new_lotto_numbers()
     nums_list = []
     rounds = 1
     founded_equals = 0
@@ -110,4 +130,3 @@ def reset_game():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
