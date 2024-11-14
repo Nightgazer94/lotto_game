@@ -1,0 +1,90 @@
+body {
+    font-family: 'Georgia', serif;
+    background: linear-gradient(45deg, #000000, #40E0D0);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.req_form {
+    background: #1f2833;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 100%;
+    border: 2px solid #66fcf1;
+}
+
+.req_form label {
+    display: block;
+    font-weight: bold;
+    color: #c5c6c7;
+    margin-bottom: 10px;
+}
+
+.req_form input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #66fcf1;
+    border-radius: 10px;
+    outline: none;
+    background: #0b0c10;
+    color: #ffffff;
+    transition: border-color 0.3s;
+}
+
+.req_form input[type="number"]:focus {
+    border-color: #45a29e;
+}
+
+.req_form input[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: #66fcf1;
+    color: #0b0c10;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.req_form input[type="submit"]:hover {
+    background: #45a29e;
+    transform: scale(1.05);
+}
+
+h1, h2 {
+    text-align: center;
+    color: #66fcf1;
+}
+
+h2 {
+    margin-top: 30px;
+}
+
+.container {
+    background: #1f2833;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+    border: 3px solid #45a29e;
+    width: 600px;
+}
+h3 {
+    color: #66fcf1;
+    font-weight: bold;
+    text-align: center;
+}
+
+h6 {
+    color: #66fcf1;
+    font-weight: bold;
+    text-align: center;
+}
+

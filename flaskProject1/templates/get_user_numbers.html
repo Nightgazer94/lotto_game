@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_get_user_numbers.css') }}">
+    <title>Welcome to lottery</title>
+</head>
+<body>
+<div class="container">
+    <!-- Page header with introductory message for the lottery game -->
+    <h3>Welcome to the lottery, write your 6 lucky numbers from 1 to 49 and hope that luck will smile on you</h3>
+    <h6>Enter the numbers one at a time</h6>
+
+    <!-- Display the current round number -->
+    <h1>Enter {{ round }}. number</h1>
+
+    <!-- Form to submit a single lottery number -->
+    <form method="post" class="req_form">
+
+        <!-- Input label for number entry -->
+        <label for="number">Enter number:</label>
+        <input type="number" name="number" id="number" placeholder="Enter number" required>
+
+        <!-- Submit button to send the entered number to the lottery system -->
+        <input type="submit" value="Send to lottery">
+    </form>
+
+    <!-- Display the list of numbers entered by the user so far -->
+    <h2>Your numbers: {{ nums_list }}</h2>
+</div>
+</body>
+</html>

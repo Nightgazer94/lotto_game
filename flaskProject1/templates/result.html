@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_result.css') }}">
+    <title>Lottery result</title>
+</head>
+<body class="result_body">
+  <div class="container">
+    <!-- Table to display lottery numbers and player's chosen numbers -->
+    <table class='result_table'>
+        <thead>
+        <tr>
+            <!-- Header row displaying the drawn lottery numbers -->
+            <th>Lottery Numbers:</th>
+            <th>{{ lotto_number1 }}</th>
+            <th>{{ lotto_number2 }}</th>
+            <th>{{ lotto_number3 }}</th>
+            <th>{{ lotto_number4 }}</th>
+            <th>{{ lotto_number5 }}</th>
+            <th>{{ lotto_number6 }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <!-- Row displaying the numbers chosen by the player -->
+            <td>Player Numbers:</td>
+            <td>{{ user_number1 }}</td>
+            <td>{{ user_number2 }}</td>
+            <td>{{ user_number3 }}</td>
+            <td>{{ user_number4 }}</td>
+            <td>{{ user_number5 }}</td>
+            <td>{{ user_number6 }}</td>
+        </tr>
+        <tr>
+            <!-- Row displaying the result message based on matching numbers -->
+            <td colspan="7">{{ founded_equals }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Button to reset the game and play again, wrapped in a link -->
+    <a href="{{ url_for('reset_game') }}">
+      <button type="button" class="play_again_button">Play Again</button>
+    </a>
+  </div>
+</body>
+</html>
